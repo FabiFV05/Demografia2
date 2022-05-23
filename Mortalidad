@@ -1,0 +1,73 @@
+---
+title: "Mortalidad"
+author: "Fabiola Fernández Villalva"
+output: html_document
+date: '2022-05-18'
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<center> <h1>__Mortalidad__</h1> </center>
+<div style="text-align: justify">
+
+La mortalidad es un elemento de la demografia junto con la fecundidad y
+la migración.  
+
+__-Esperanza de vida sea mayor__  
+
+__-Pensiones__  
+
+__-Gatos de salud(privado y público)__  
+
+__-Presión havia la población económica activa__
+
+### Muerte  
+
+___Definición___:  
+
+Desaparición de toda evidencia de vida en cualquier tiempo después de
+que una persona haya nacido viva.  
+
+### Tasa Bruta de mortalidad  
+$$TBM_{t\rightarrow t+n}=\frac{M_{t\rightarrow t+n}}{P_{t\rightarrow t+n}}$$
+donde  
+M= Muertes del tiempo t a t+m  
+P=Población a mitad del año de t a t+n  
+
+### Ejemplo  
+Datos:  
+Muertes= 623,300   
+Población a mitad del año= 127,000,000  
+$$TBM=\frac{623,300}{127,000,000}=0.004907$$ $$TBM*100=4.9$$
+La TBM se interpreta como 49 muertes de cada 100 personas.    
+
+### Tasa especifíca de mortalidad
+
+La tasa especifica de mortalidad calcula la mortalidad por grupo de edad
+y permite conocer la tasa por cada grupo de edad.   
+
+La TEM se cálcula porque la mortalidad es diferenciada por edad o por
+grupo de edad.Por ejemplo, la persona de 0 a 9 años tiene una mayor
+mortalidad que las personas de 1 a 4 años o 5 a 9 años.   
+
+$$TEM_{{t\rightarrow t+n}}^i=\frac{M_{t\rightarrow t+n}^i}{P_{t\rightarrow t+n}^i}$$
+donde:   
+i=Grupo de edad    
+M= Muertes del tiempo t a t+m   
+P=Población a mitad del año de t a t+n  
+<div/>
+
+### Ejemplo  
+
+| Grupo de Edad | Muertes | Pob a mitad del año | TEM      | TEM por 1000 |
+|---------------|---------|---------------------|----------|--------------|
+|  <1           | 8321    | 12243521            | 0.000679 | 67           |
+| 1 a 4         | 2132    | 12873410            | 0.00016  | 16           |
+|               |         |                     |          |              |
+| 65 a 69       | 95748   | 5872590             | 0.0163   | 1630         |
+| 70+           | 157197  | 1735817             | 0.0905   | 9050         |
