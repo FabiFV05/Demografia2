@@ -1,0 +1,43 @@
+---
+title: "clase22"
+output: html_document
+date: '2022-05-11'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+install.packages("dplyr")
+require(dplyr)
+
+
+Base1<- read.csv(file.choose())
+
+Base2 <- Base1 %>%
+as_tibble () %>%
+mutate (gpoeda=case_when (EDAD>=0 & EDAD<=14~ 1,
+EDAD>=15 & EDAD<=29~ 2,
+EDAD>=30 & EDAD<=59~ 3,
+EDAD>=60 & EDAD<=110~ 4,
+EDAD==999~ 5),
+conyu=case_when(SITUA_CONYUGAL==1 | SITUA_CONYUGAL==5~1,
+SITUA_CONYUGAL>=2  & SITUA_CONYUGAL<=4 ~2,
+SITUA_CONYUGAL==6~ 3,
+SITUA_CONYUGAL==9~ 4)) %>%
+filter(MUN==3| MUN==1)%>%
+select(MUN,SITUA_CONYUGAL,conyu,EDAD,gpoeda,SEXO,FACTOR)
+
+table(Base2$MUN)
+table(Base2$SEXO)
+table(Base2$EDAD,Base2$gpoeda)
+table(Base2$SITUA_CONYUGAL,Base2$conyu)
+
+#### EXPANDIR DATOS 
+install.packages("questionr")
+require(questionr)
+
+wtd.table(Base2$SEXO, weights=Base2$FACTOR)
+wtd.table(Base1$SEXO, weights=Base1$FACTOR)
