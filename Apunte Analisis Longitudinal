@@ -1,0 +1,214 @@
+title: "Análisis Longitudinal"
+author: "Fabiola Fernández Villalva"
+date: '2022-05-23'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<center> <h1>Tasas de mortalidad (análisis longitudinal)</h1> </center>
+<div style="text-align: justify">
+
+
+Las tasas de mortalidad en un análisis longitudinal nos permite calcular las tasas específicas de mortalidad por edad a un grupo de personas que nacieron en un periodo de tiempo (cohorte) igual, es decir, con esta tasa se puede dar
+seguimiento seguimiento a una generación de personas.  
+
+Por ejemplo, si tenemos a las personas de __5 a 14 años__ en 1990, este conjunto de personas nacieron entre el periodo de 1976 - 1985 y este mismo grupo en el año
+2000 tendrán __15 a 24 años__, lo que vamos hacer es calcular la tasa específica de mortalidad a este grupo poblacional e 1990, 2000, 2010 y 2020. DE esta manera,
+vamos a tener las tasas específicas del mismo grupo en diferentes edades.  
+
+En otras palabras, lo que se plantea es analizar estas tasas de mortalidad a través de un análisis longitudinal. Para obtener las tasas es necesaria tener información de los diferentes censos.  
+
+__Grupo 1 (cohorte)..... verde__  
+__Grupo 2 (cohorte) .... naranja__  
+<div/>
+
+### Ejercicio   
+```{r}
+library(knitr)
+library(kableExtra)
+
+ejemplo11 <- data.frame("GPOEDAD" = c ("<1","1-4","5-14" ,"15-24","25-34","34-44","45-54","55-64","65-74","75+"),
+                 "AÑO_1950" = c(3846.2,186.7,84.3,115.4,197.3,287.2,761.8,1674.6,3961.3,22369.3),
+         "AÑO_1960" = c (3214.2,155.7,64.3,90.4,166.3,226.2,669.8,1516.6,3630.3,20278.4),"AÑO_1970" = c(2682.2,123.7,53.3,78.4,151.3,184.2,512.8,1275.6,3373.3,16736.4),
+            "AÑO_1980"= c(1809.2,80.7,41.3,63.4,129.3,163.2,400.8,919.6,2721.3,16304.4),
+         "AÑO_1990"=c (1377.2,56.7,34.3,51.4,127.3,160.2,309.8,807.6,2490.3,15652.4),
+            "AÑO_2000"=c (1142.2,44.7,31.3,43.4,105.3,144.2,267.8,675.6,2259.3,15411.4),
+           "AÑO_2010"=c (1030.2,31.7,24.3,30.4,103.3,131.2,248.8,603.6,1827.3,14429.4))
+kable(ejemplo11) %>%
+  kable_styling(full_width = F) %>%
+ add_header_above(c("Tasas Especificas de Mortalidad por 100,000 habitantes de 1950 a 2010" = 8))
+```
+   
+
+<div style="text-align: justify">
+
+Cómo se mencionó anteriormente las tasas de mortalidad a través de un análisis
+longitudinal permite dar seguimiento a una “generación” poblacional a través del
+tiempo. En este caso tenemos datos desde 1950 hasta el año 2010 y en el cuadro
+se presentan dos cohortes de naciemiento una que tiene entre __15 y 24 años__ en
+el año 1950 y este grupo poblacional llega hasta el año 2010 con 75 años y más. El segundo grupo son personas tenían __35 a 44 años en 1950__ y estas personas en
+1990 ya llegan a tener 75 años y más.  
+
+___Esta es una tasa específica de mortalidad con un análisis longitudinal.___ 
+
+En el cuadro anterior, podemos decir que en 1950 las personas de 15 a 24 años
+tenían __115 muertes__ por cada 100,000 habitantes. En 1960, para este mismo
+grupo había __166 muertes__ por cada 100,000 y así sucesivamente hasta el año
+2010.  
+
+Para el grupo dos (color naranja) tenemos que en el año 1950 había __287 muertos__ por cada 100 mil habitantes de las personas entre 35 y 44 años.
+
+<div/>
+
+<center> <h1>__Mortalidad por causas de muerte__</h1> </center>
+<div style="text-align: justify">
+
+Uno de los análisis que se utiliza en el análisis de la mortalidad son las causas de muertes por enfermedad, este análisis es realmente importante debido a que nos permite profundizar en el tipo de muerte que tienen las personas para después estudiar las principales causas de muerte y así poder disminuir la tasa bruta de mortalidad o las tasas específicas de mortalidad que hemos visto. Al profundizar en las causas de muerte por enfermedad y grupos de edad, se pueden generar políticas de salud que permitan incrementar la esperanza de vida de la población.  
+
+Para empezar hay que mencionar que las causas de muerte tienen una clasificación
+internacional que permite que haya un consenso en los diferentes países para a su vez tener estadísticas comparativas y análisis por causas de enfermedad de los diferentes países. Es decir, por ejemplo para las muertes por cáncer se tiene un código que clasifica estas enfermedades.  
+
+Esta clasificación se le conoce como la __Clasificación Internacional de Enfermedades__ y es evaluada cada 10 años por la Organización Mundial de salud, esta clasificación contiene códigos para cada enfermedad es decir individualmente cada una de las enfermedades tienen asignado un código. Para ejemplificar lo anterior se muestra en el cuadro siguiente las __5 principales causas de muerte__ entre una población así como su __distribución porcentual__ y __la tasa de mortalidad__ para cada enfermedad.
+<div/>
+```{r}
+library(knitr)
+library(kableExtra)
+
+ejemplo <- data.frame("Causas_de_muerte" = c("Cardiovasculares","Respiratorias","Cancer" ,"Diabetes","Accidentes","Tumores"),
+                 "Porcentaje_H" = c(54.3,42.7,45.5,43.7,68.3,44.3),
+                 "Porcentaje_M" = c(45.7,57.3,54.5,56.3,31.7,55.7),
+                 "Distribucion_Total" = c(27.4,6.4,16.2,9.2,18.3,22.5),
+                 "Tasa_ de_Mortalidad"= c(217.3,85.6,154.1,79.8,174.1,195.2))
+kable(ejemplo) %>%
+  kable_styling(full_width = F) %>%
+ add_header_above(c("Tabla. Distribución porcentual por mayores causas de muerte, por sexo y tasa de mortalidad por
+causas" = 5))
+```
+
+<div style="text-align: justify">
+
+En la tabla se puede observar la distribución porcentual por mayores causas de muerte por sexo y tasa de mortalidad por causas, por ejemplo, en la ___columna___ dos se expone el porcentaje de muertes masculinas por enfermedad específica. Eso quiere decir que de enfermedades cardiovasculares 54 por ciento de las muertes fueron en los hombres y aproximadamente 45 de las muertes de enfermedades cardiovasculares fueron en mujeres, o en otras palabras, se mueren más hombres que mujeres en la enfermedad cardiovascular.  
+
+En contraste, en la ___columna 3___ se muestra que 56.3 por ciento de los muertos por diabetes son mujeres. Para la ___columna 4___ se presenta la distribución total por causa de muerte Es decir, de todas las defunciones que porcentaje fueron de enfermedades cardiovasculares, qué porcentajes fueron respiratorias, etcétera. En la tabla se observa que 27 por ciento de las muertes fueron por enfermedades cardiovasculares y 16 por ciento fueron por cáncer (columna 4). Por último, la ___columna 5___ tenemos la tasa de mortalidad por causa por 100,000 habitantes, en esta columna se expone que 217 personas por cada 100,000 habitantes se murieron por enfermedades cardiovasculares.  
+
+En la enfermedad respiratoria tenemos que 85 personas murieron por esta enfermedad por cada 100.000 y así sucesivamente es cómo se interpreta la tabla 3.
+Además, en esta sección de las enfermedades por causa de muerte por causas vamos a exponer cómo se calcularon cada una de las columnas de la tabla que se mostró
+anteriormente en las siguientes líneas se muestran las ecuaciones que permiten calcular cada una de las columnas de las tablas.  
+
+$$\text{COLUMNA 2}=\frac{\text{Número de defunciones por edad especifica de hombres}}{\text{Total de defunciones por enfermedad especifica}}$$
+$$\text{COLUMNA 3}=\frac{\text{Número de defunciones por edad especifica de mujeres}}{\text{Total de defunciones por enfermedad especifica}}$$
+$$\text{COLUMNA 4}=\frac{\text{Número de defunciones por edad especifica}}{\text{Total de defunciones}}$$
+$$\text{COLUMNA 5}=\frac{\text{Total de defunciones por edad especifica}}{\text{Población Total}}*100,000$$
+<center> <h1>__Mortalidad Materna__</h1> </center>
+<div style="text-align: justify">
+En esta sección vamos a ver la mortalidad materna por lo que es importante primero definir este tipo de mortalidad, según la Organización Mundial de la Salud, la mortalidad materna es aquélla que se asocia con la muerte de una mujer mientras está embarazada o dentro de los primeros 42 días de la terminación del embarazo por cualquier causa relacionada por el embarazo o su manejo, para esta mortalidad no se consideran accidentes o causas incidentales.  
+
+Las muertes maternas pueden ocurrir a través de dos modalidades: 
+1) por causas directas tales como complicaciones obstétricas,
+
+2) por causas indirectas tales como enfermedades preexistentes como la hipertensión o diabetes que frecuentemente o generalmente provocan agravamiento durante el embarazo.  
+
+Para medir la mortalidad materna utiliza un indicador que se denomina razón de
+mortalidad materna y que se define a continuación.
+$$RRM_{t\rightarrow t+n}=\frac{DM_{t\rightarrow t+n}}{N_{t\rightarrow t+n}}$$
+Donde:  
+$RRM_{t\rightarrow t+n}=\text{Razón de mortalidad materna en el periodo t a t+n}$  
+
+$DM_{t\rightarrow t+n}=\text{Defunciones Maternas en el periodo t a t+n}$ 
+
+$N_{t\rightarrow t+n}=\text{Número de nacidos vivos en el periodo t a t+n}$
+
+Otro indicador de la mortalidad materna es aquel que relaciona el número de muertes por maternidad y el número de mujeres en edad reproductiva, este indicador se denomina como ___Tasa de Mortalidad Materna (TMM)___ y se define:
+$$TTM_{t\rightarrow t+n}=\frac{DM_{t\rightarrow t+n}}{\sum_{i=15}^{44}M_{t\rightarrow t+n}^{i}}$$
+Donde:  
+DM= Defunciones Maternas    
+
+TTM=Tasa de mortalidad Materna    
+
+$M^{i}=\text{número de mujeres en el periodo t a t+n en la edad i}$  
+
+Esta tasa de mortalidad también se puede calcular por edad específica.  
+
+Es importante señalar que la tasa de mortalidad materna es un indicador de desarrollo humano según las Naciones Unidas los países con más alto desarrollo humano generalmente tienen una baja tasa de mortalidad materna.  
+
+<div/>
+
+<center> <h1>__Mortalidad fetal y muertes  infantiles__</h1> </center>
+<div style="text-align: justify">
+En la siguiente sección vamos a abordar las tasas de mortalidad relacionadas con las niñas y los niños es decir tasas de mortalidad fetal y tasas de mortalidad infantil. El embarazo puede resultar en un nacido vivo o varios nacidos vivos o en un nacimiento sin vida, es decir, un aborto.  
+
+Frecuentemente las muertes infantiles se refieren a muerte dentro del primer año de vida y se pueden dividir en dos períodos el primer periodo consta o se denomina muertes neonatales y está relacionado a la muerte de la persona durante las primeras 4 semanas de vida. El segundo periodo se denomina muertes postnatales y está relacionada con las muertes dentro de los 48 semanas de vida restantes.  
+
+Otra medida qué está relacionada son las muertes perinatales y se definen como la suma de todos los no nacidos vivos y de todas las muertes neonatales. Otro aspecto importante de la mortalidad infantil es la que se relaciona con el aborto sin embargo estas tasas e indicadores sobre el aborto son difíciles de calcular en países donde todavía el aborto es ilegal debido a la falta de
+información sobre estos casos.    
+
+En lo que respecta a la mortalidad fetal se relaciona cuando un feto es nacido muerto con al menos 20 semanas de gestación o con un peso al nacer de al menos 400 gramos, sin embargo, para este curso no vamos a calcular la tasa de mortalidad fetal debido a la falta de información como se mencionó anteriormente
+Continuando con las muertes de las muertes de los niños y niñas un indicador o una medida de nacimiento se relaciona con la tasa de mortalidad neonatal que se define de la siguiente manera:  
+
+$$TMI_{t\rightarrow t+n}=\frac{DM_{t\rightarrow t+n}^{<1}}{N_{t\rightarrow t+n}}$$
+Donde:  
+__TMI=Tasa de mortalidad Infantil__    
+
+__DM=Defunciones de personas menores a un año.__    
+
+__N=Nacidos vivos en un periodo determinado__   
+<div/>
+
+<center> <h1>__Años de Vida Potenciales Perdidos (AVPP)__</h1> </center>
+<div style="text-align: justify">
+Un índice que se utiliza en el tema de mortalidad en particular las causas de muerte es el denominado Años de Vida Potenciales Perdidos. Para calcular este índice se requieren indicadores asociados con las muertes y la esperanza de vida al nacer, en este vamos a plantear la ecuación y después se procede a realizar un ejemplo para saber los años de vida potencialmente perdidos.  
+
+La idea principal de este índice se centra en saber cuantos años se perdieron por muertes __“prematura”__ de la población, por ejemplo, una persona que se murió a los 35 años y la esperanza de vida de esa población es de 79 años, entonces la AVPP son 79-35 = 44. Es decir, el planteamiento es consiste en los años que se han perdido por aquellas personas que no lograron llegar a la esperanza de vida de diferente país o región. La ecuación del AVPP es la siguiente:
+$$AVPP=\sum_{i=0}^{n} (E-X_{i})*D$$
+Donde:  
+$AVPP=\text{Años de vida perdidos}$  
+
+$E=\text{Esperanza de vida al nacer}$  
+
+$X_{i}=\text{Es el año de defunción de la persona}$  
+
+$D=\text{Defunciones}$  
+
+El ejemplo que se expone aquí para los AVPP son por grupos de edad, en este ejemplo no se cuenta con la edad exacta al al fallecer de la persona por lo que se utiliza el punto medio del grupo de edad, es decir, para el primer grupo que son los menores a un año el punto medio es .5 y así sucesivamente con los demás grupos de edad.  
+Para este ejemplo vamos a plantear la esperanza de vida en México que es de 75 años, es decir, E = 75.  
+
+<div/>
+
+: <center>**Tabla. Años de vida potencialmente perdidos**</center>
+
++-----------+-----------+-----------+-----------+-----------+
+| Grupo de  | Xi        | E-Xi      | Número de | AVPP      |
+| edad      |           |           |           |           |
+|           | Edad al   |           | muertes   |           |
+|           | morir     |           |           |           |
++:=========:+:=========:+:=========:+:=========:+:=========:+
+|  <1       | 0.2       | 74.5      | 4381      | 326,385   |
++-----------+-----------+-----------+-----------+-----------+
+| 1 a 4     | 2         | 73        | 572       | 41,756    |
++-----------+-----------+-----------+-----------+-----------+
+| 5 a 9     | 7.5       | 67.5      | 356       | 24,030    |
++-----------+-----------+-----------+-----------+-----------+
+| 10 a 14   | 12.5      | 62.5      | 410       | 25,625    |
++-----------+-----------+-----------+-----------+-----------+
+| 15a 19    | 17.5      | 57.5      | 2,198     | 126,385   |
++-----------+-----------+-----------+-----------+-----------+
+| 20 a 24   | 22.5      | 52.5      | 3,215     | 168,788   |
++-----------+-----------+-----------+-----------+-----------+
+| .....     | .....     | ......    | ....      | ...       |
++-----------+-----------+-----------+-----------+-----------+
+| .......   | ....      | .....     | .....     | ....      |
++-----------+-----------+-----------+-----------+-----------+
+| 60 a 64   | 62.5      | 12.5      | 21,470    | 271,750   |
++-----------+-----------+-----------+-----------+-----------+
+| 65 a 69   | 67.5      | 7.5       | 26,329    | 197,468   |
++-----------+-----------+-----------+-----------+-----------+
+| 70 a 74   | 72.5      | 2.5       | 32,401    | 81,003    |
++-----------+-----------+-----------+-----------+-----------+
+| Total     |           |           | 213,421   | 3,415,792 |
++-----------+-----------+-----------+-----------+-----------+
+
