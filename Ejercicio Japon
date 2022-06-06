@@ -1,0 +1,39 @@
+#Hecho por:
+#Jaqueline González Andrés
+#Fabiola Fernandez Villalva
+install.packages("tidyverse")
+library(tidyverse)
+library(ggplot2)
+#Gráfica de México
+graficam <- data_frame(
+  "EE"=c(1,2,3,4,5,6),
+  "Nv"=c(464102,748723,624181,418695,205503,49430),
+  "Pf"=c(5505991,5079067,4582202,4444767,4328249,3658904),
+  "tefm"=c(84.2903,147.4131,136.2485,94.1995,47.4794,13.5095))
+
+fpm<-ggplot(graficam,aes(EE,tefm))
+fpm +geom_point(colour= "#B491F0", size= 3) + 
+  geom_line(colour="#725B9A") +
+  labs(x="Edades Agrupadas", y="Tasa específica de fecundidad")+
+  scale_x_continuous(breaks = c(1:6),labels = c("15 a 19","20 a 24","25 a 29","30 a 34","35 a 39",
+                                                "40 a 44"))+ 
+  theme(axis.title.x = element_text(face="bold", vjust=-0.5, colour="#D3C989", size=rel(1)))+
+  theme(axis.title.y = element_text(face="bold", vjust=1.5, colour="#D3C989", size=rel(1)))+
+  ggtitle ("Grafica de Tasas de fecundidad por Edad Agrupadas \n México 2010")+
+  theme (plot.title = element_text(family="Courier",size=rel(1), vjust=2 ,hjust=1,face="bold",
+                                   color="#41752F", lineheight=1.5))
+#Gráfica de Japón
+graficaj <- data_frame(
+  "EE"=c(1,2,3,4,5,6),
+  "tefm"=c(4.938467,34.315220,83.450920,90.946100,43.908500,7.369786))
+fpj<-ggplot(graficaj,aes(EE,tefm))
+fpj +geom_point(colour= "#EDD5D8", size= 3) + 
+  geom_line(colour="#D8AAB7") +
+  labs(x="Edades Agrupadas", y="Tasa específica de fecundidad")+
+  scale_x_continuous(breaks = c(1:6),labels = c("15 a 19","20 a 24","25 a 29","30 a 34","35 a 39",
+                                                "40 a 44"))+ 
+  theme(axis.title.x = element_text(face="bold", vjust=-0.5, colour="#C6CEBE", size=rel(1)))+
+  theme(axis.title.y = element_text(face="bold", vjust=1.5, colour="#C6CEBE", size=rel(1)))+
+  ggtitle ("Grafica de Tasas de fecundidad por Edad Agrupadas \n Japón 2010")+
+  theme (plot.title = element_text(family="Courier",size=rel(1), vjust=2 ,hjust=1,face="bold",
+                                   color="#DEC8BD", lineheight=1.5))
