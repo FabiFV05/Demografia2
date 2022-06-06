@@ -1,0 +1,81 @@
+---
+title: 'Ejercicio: Tasas de Fecundidad'
+author: "Fabiola Fernández Villalva"
+date: '2022-05-04'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<center> <h1>Ejercicio: Fecundidad</h1> </center>
+<div style="text-align: justify">
+#### Instrucciones  
+Hacer un análisis comparativo de los dos países elegidos con respecto a las TG y TBR. En Rmarkdown añadir un poco de contexto sobre las diferencias de los países.  
+<div>
+### Amanalco   
+gpoedad<- c("15-19","20-24","25-29","30-34","35-39","40-44")
+nac<- c(84,140,118,55,21,2)
+pobfem<- c(1066,1056,1081,953,841,747)
+nacfem<- c(40,70,54,21,12,5)
+nachm<- nac-nacfem
+propsex=(sum(nachm)/sum(nacfem))*100
+S=(100/(100+propsex))
+tef<- (nac/pobfem)
+teffem<- (nacfem/pobfem)
+n=5
+TGrF_AM=sum(nac/pobfem)*5
+TGF_AM=sum(tef)*n
+TBR_AM<- TGF_AM*S
+tasas<-data.frame(gpoedad,nac,pobfem,nacfem,nachm,tef,teffem)
+
+### Almoloya de Juárez  
+gpoedad_al<- c("15-19","20-24","25-29","30-34","35-39","40-44")
+nac_al<- c(423,757,641,368,148,48)
+pobfem_al<- c(7959,7299,7222,7079,6812,6169)
+nacfem_al<- c(206,369,331,180,84,20)
+nachm_al<- nac-nacfem
+propsex_al=(sum(nachm_al)/sum(nacfem_al))*100
+S=(100/(100+propsex_al))
+tef_al<- (nac_al/pobfem_al)
+teffem_al<- (nacfem_al/pobfem_al)
+n=5
+TGrF_AL=sum(nac_al/pobfem_al)*5
+TGF_AL=sum(tef_al)*n
+TBR_AL<- TGF_AL*S
+tasas2<-data.frame(gpoedad_al,nac_al,pobfem_al,nacfem_al,nachm_al,tef_al,teffem_al)
+
+## Resultados  
+#### Amanalco  
+$$TGF_{AM}=2.0294666525$$
+$$TBR_{AM}=0.97607681$$  
+
+#### Almoloya de Juárez
+$$TGF_{AL}=1.6355437167$$
+$$TBR_{AL}=1.382313226$$
+
+TBR_AL*100
+TBR_AM*100
+
+
+## Interpretación 
+<div style="text-align: justify">
+Si multiplicamos las tasas brutas de reproducción por 1000 de cada municipio , obtenemos lo siguiente :  
+
+__-Por cada 100 mujeres en Amanalco nacen 98 niñas. __
+
+__-Por cada 100 mujeres en Almoloya nacen 138 niñas. __
+
+Asi mismo para la tasa general de fecundidad tenemos que:  
+__-Por cada mujer nacen 2.02 niños en Amanalco.__  
+__-Por cada  mujer nacen 1.63 niños en Almoloya.__
+
+ Si analizamos la extensión terrirorial de cada municipio nos damos cuenta que Almoloya tiene un terrirorio de 483.8 km cuadrados , el doble que el municipio de Amanalco que cuenta con 223 km cuadrados.Dado esta información podríamos inferir que Almoloya tiene mayor cantidad de población con respecto a Amanalco por lo tanto la cantidad de mujeres en Almoloya es mayor que en Amanalco.  
+ 
+ En cuanto a la tasa general de fecundidad ambos municpios tienen una tasa similar si la redondeamos , la cantidad de hijos por mujer sería 2 según los datos recabados. A pesar que en Amanalco es un municipio rural se tiene un buen control de hijos a mi perspectiva al gual que en Almoloya que es un municipio más desarrollado.Por otro lado podemos observar que en Almoloya nacen más niñas por cada mujer , es decir, mas del 100 son mujeres de las madres que dan a luz en el año 2020. Esto coincide con los datos actuales de población, es decir,  la población total de Almoloya de Juárez en 2020 fue 174,587 habitantes, siendo 50.1% mujeres y 49.9% hombres.  
+Sin embargo en Amanalco por cada 100 mujeres nacen 98 niñas , como es de esperarse en el Estado de Mexico predomina la poblacion femenina. En 2020, la población en Amanalco fue de 23,675 habitantes (48.7% hombres y 51.3% mujeres). 
+
+En conclusión puedo decir que Almoloya y Amanalco son municipios muy similares en cuanto a cultura y tradiciones , asi como de religión. A pesar de que tienen diferente extensión de territorio sus tasas son muy similares , se comportan casi de la misma forma. Por lo tanto no hay mucha diferencia en el número de hijos que se tienen por mujer , sin embargo la cantidad de niñas que nacen por cada mujer si varia y esto se deba a cuestiones biológicas.
+<div>
